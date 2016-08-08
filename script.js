@@ -63,37 +63,37 @@ var Robot = function(){}
 console.log(darshan, galen, nariko, rabiah, billybob, bertha)
 console.log(robots_arr)
 
-function getBotChoice1(){
+function getBotChoice(){
   var $bot1 = $('#robot_select')
-  var $bot1_val
+  var $bot2 = $('#robot_select2')
+
   $bot1.on('change', function(){
     $bot1_val = $bot1.val()
+    console.log($bot1_val)
     return $bot1_val
+  })
+
+  $bot2.on('change', function(){
+    $bot2_val = $bot2.val()
+    console.log($bot2_val)
+    return  $bot2_val
   })
 }
 
-function getBotChoice2(){
-  var $bot2 = $('#robot_select2')
-  $bot2.on('change', function(){
-    var $bot2_val = $bot2.val()
-    console.log($bot2_val)
-    return $bot2_val
-  })
-}
 
 function getBotObject(choice){
   console.log(choice)
   var select = $('select');
   var selected_bot;
   select.on('change', function(){
-  for(var key in robots_arr){
+  for(key in robots_arr){
     if(choice === robots_arr[key].name){
-    console.log(robots_arr[key].name)
+      console.log(robots_arr[key].name)
       selected_bot = robots_arr[key].name;
     }
   }
-  console.log(selected_bot)
+  // console.log(selected_bot)
   })
 }
 
-  getBotObject(getBotChoice2())
+getBotObject(getBotChoice())
