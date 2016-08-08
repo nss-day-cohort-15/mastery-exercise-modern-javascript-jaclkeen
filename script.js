@@ -1,3 +1,4 @@
+var robots_arr = []
 // ORIGINAL ROBOT OBJECT DECLARTION
 var Robot = function(){}
 
@@ -20,38 +21,79 @@ var Robot = function(){}
   ATV.prototype = new Robot()
 
 // TYPES OF DRONES
-//FIRST DRONE
-    var Darshan = new Drone()
-      Darshan.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5,
-      Darshan.hp = Math.floor(Math.random() * (180 - 150 + 1)) + 100
-//SECOND DRONE
-    var Galen = new Drone()
-      Galen.attack = Math.floor(Math.random() * (15 - 5 + 1)) + 5,
-      Galen.hp = Math.floor(Math.random() * (150 - 120 + 1)) + 100
-
+  //FIRST DRONE
+    var darshan = new Drone()
+      darshan.name = 'darshan'
+      darshan.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5
+      darshan.hp = Math.floor(Math.random() * (180 - 150 + 1)) + 100
+      robots_arr.push(darshan)
+  //SECOND DRONE
+    var galen = new Drone()
+      galen.name = 'galen'
+      galen.attack = Math.floor(Math.random() * (15 - 5 + 1)) + 5
+      galen.hp = Math.floor(Math.random() * (150 - 120 + 1)) + 100
+      robots_arr.push(galen)
 // TYPES OF BIPEDAL'S
-//FIRST BIPEDAL
-    var Nariko = new Bipedal()
-      Nariko.attack = Math.floor(Math.random() * (30 - 20 + 1)) + 20,
-      Nariko.hp = Math.floor(Math.random() * (80 - 60 + 1)) + 60
-//SECOND BIPEDAL
-    var Rabiah = new Bipedal()
-      Rabiah.attack = Math.floor(Math.random() * (40 - 20 + 1)) + 20,
-      Rabiah.hp = Math.floor(Math.random() * (85 - 50 + 1)) + 50
-
+  //FIRST BIPEDAL
+    var nariko = new Bipedal()
+      nariko.name = 'nariko'
+      nariko.attack = Math.floor(Math.random() * (30 - 20 + 1)) + 20
+      nariko.hp = Math.floor(Math.random() * (80 - 60 + 1)) + 60
+      robots_arr.push(nariko)
+  //SECOND BIPEDAL
+    var rabiah = new Bipedal()
+      rabiah.name = 'rabiah'
+      rabiah.attack = Math.floor(Math.random() * (40 - 20 + 1)) + 20
+      rabiah.hp = Math.floor(Math.random() * (85 - 50 + 1)) + 50
+      robots_arr.push(rabiah)
 //TYPES OF ATV'S
-//FIRST ATV
-    var BillyBob = new ATV()
-      BillyBob.attack = Math.floor(Math.random() * (10 - 3 + 1)) + 3,
-      BillyBob.hp = Math.floor(Math.random() * (200 - 120 + 1)) + 120
-//SECOND ATV
-    var Bertha = new ATV()
-      Bertha.attack = Math.floor(Math.random() * (5 - 3 + 1)) + 3,
-      Bertha.hp = Math.floor(Math.random() * (200 - 180 + 1)) + 180
+  //FIRST ATV
+    var billybob = new ATV()
+      billybob.name = 'billybob'
+      billybob.attack = Math.floor(Math.random() * (10 - 3 + 1)) + 3
+      billybob.hp = Math.floor(Math.random() * (200 - 120 + 1)) + 120
+      robots_arr.push(billybob)
+  //SECOND ATV
+    var bertha = new ATV()
+      bertha.name = 'bertha'
+      bertha.attack = Math.floor(Math.random() * (5 - 3 + 1)) + 3
+      bertha.hp = Math.floor(Math.random() * (200 - 180 + 1)) + 180
+      robots_arr.push(bertha)
 
-console.log(Darshan)
-console.log(Galen)
-console.log(Nariko)
-console.log(Rabiah)
-console.log(BillyBob)
-console.log(Bertha)
+console.log(darshan, galen, nariko, rabiah, billybob, bertha)
+console.log(robots_arr)
+
+function getBotChoice1(){
+  var $bot1 = $('#robot_select')
+  var $bot1_val
+  $bot1.on('change', function(){
+    $bot1_val = $bot1.val()
+    return $bot1_val
+  })
+}
+
+function getBotChoice2(){
+  var $bot2 = $('#robot_select2')
+  $bot2.on('change', function(){
+    var $bot2_val = $bot2.val()
+    console.log($bot2_val)
+    return $bot2_val
+  })
+}
+
+function getBotObject(choice){
+  console.log(choice)
+  var select = $('select');
+  var selected_bot;
+  select.on('change', function(){
+  for(var key in robots_arr){
+    if(choice === robots_arr[key].name){
+    console.log(robots_arr[key].name)
+      selected_bot = robots_arr[key].name;
+    }
+  }
+  console.log(selected_bot)
+  })
+}
+
+  getBotObject(getBotChoice2())
