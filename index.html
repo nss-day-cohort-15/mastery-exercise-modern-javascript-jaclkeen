@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Robot Battledome</title>
+</head>
+<body class="container">
+
+  <header><h1>Robot Battledome</h1></header>
+
+  <div class="name_inputs" id="name_inputs">
+    <label for="input1">First Robot Name: </label>
+    <input type="text" name="input1" id="input1" class="input">
+
+    <select class="robot_select">
+      <option id="darshan" value="darshan">Drone: Darshan</option>
+      <option id="galen" value="galen">Drone: Galen</option>
+      <option id="nariko" value="nariko">Bipedal: Nariko</option>
+      <option id="rabiah" value="rabiah">Bipedal: Rabiah</option>
+      <option id="billybob" value="billybob">ATV: Billy Bob</option>
+      <option id="bertha" value="bertha">ATV: Bertha</option>
+    </select>
+    <br><br>
+
+    <label for="input2">Second Robot Name: </label>
+    <input type="text" name="input2" id="input2" class="input2">
+
+    <select class="robot_select2">
+      <option id="darshan" value="darshan">Drone: Darshan</option>
+      <option id="galen" value="galen">Drone: Galen</option>
+      <option id="nariko" value="nariko">Bipedal: Nariko</option>
+      <option id="rabiah" value="rabiah">Bipedal: Rabiah</option>
+      <option id="billybob" value="billybob">ATV: Billy Bob</option>
+      <option id="bertha" value="bertha">ATV: Bertha</option>
+    </select>s
+
+    <div class="robot_imgs">
+      <img src="http://media02.hongkiat.com/humanoid_robot_artwork/Guardor_3d_robot_by_jossdiim.jpg">
+      <img src="http://techonomy.com/wp-content/uploads/2014/01/shutterstock_83042278.jpg">
+    </div>
+
+    <div class="attack" id="attack">
+      <input type="button" name="attack_button" id="attack_button" value="ATTACK">
+    </div>
+
+    <div class="winner-banner" id="winner_banner">
+      <!-- WINNER BANNER GOES HERE -->
+    </div>
+
+  </div>
+
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
