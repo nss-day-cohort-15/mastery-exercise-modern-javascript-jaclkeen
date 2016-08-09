@@ -1,7 +1,8 @@
-var robots_arr = []
-$('#winner_banner').hide()
+$('document').ready(function(){
+  var robots_arr = []
+  $('#winner_banner').hide()
 // ORIGINAL ROBOT OBJECT DECLARTION
-var Robot = function(){}
+  var Robot = function(){}
 
 // DRONE DECLARTION
   var Drone = function(){}
@@ -45,18 +46,17 @@ var Robot = function(){}
   //FIRST ATV
     var billybob = new ATV()
       billybob.name = 'billybob'
-      billybob.attack = Math.floor(Math.random() * (8 - 3 + 1)) + 3
+      billybob.attack = Math.floor(Math.random() * (20 - 5 + 1)) + 5
       billybob.hp = Math.floor(Math.random() * (70 - 60 + 1)) + 60
       robots_arr.push(billybob)
   //SECOND ATV
     var bertha = new ATV()
       bertha.name = 'bertha'
-      bertha.attack = Math.floor(Math.random() * (5 - 3 + 1)) + 3
+      bertha.attack = Math.floor(Math.random() * (15 - 10 + 1)) + 10
       bertha.hp = Math.floor(Math.random() * (80 - 70 + 1)) + 70
       robots_arr.push(bertha)
 
 console.log(darshan, galen, nariko, rabiah, billybob, bertha)
-console.log(robots_arr)
 
 function getBotChoiceAndExecute(){
   var select = $('select')
@@ -95,23 +95,24 @@ function getBotObject(choice1, choice2){
 
 function attack(bot1, bot2){
   var winner
-    if(bot1.hp > bot2.attack){
+    if(bot1.hp > 0 && bot2.hp > 0){
       bot1.hp -= bot2.attack
-      console.log("BOT1", bot1.hp)
-    }
-    else{
-      winner = "bot2"
-      winningBanner(winner)
-      $('#attack_button').attr("disabled", true)
-    }
-    if(bot2.hp > bot1.attack){
       bot2.hp -= bot1.attack
+      console.log("BOT1", bot1.hp)
       console.log("BOT2", bot2.hp)
-    }
-    else{
-      winner = "bot1"
-      winningBanner(winner)
-      $('#attack_button').attr("disabled", true)
+      if(bot1.hp < 1){
+        bot1.hp = 0
+        winner = "bot2"
+        winningBanner(winner)
+        $('#attack_button').attr("disabled", true)
+      }
+      else if(bot2.hp < 1){
+        bot2.hp = 0
+        winner = "bot1"
+        winningBanner(winner)
+        $('#attack_button').attr("disabled", true)
+      }
+      battleStatus(bot1.hp, bot2.hp)
     }
 }
 
@@ -121,7 +122,7 @@ function winningBanner(winner){
   var $banner = $('#winner-banner')
   var $banner_text = $('#banner_text')
 
-  $('#winner_banner').fadeIn()
+  $('#winner_banner').fadeIn(3000)
 
   if(winner === "bot1"){
     $banner_text.html(`Congratulations ${$player1}, you beat, ${$player2}!`)
@@ -133,4 +134,20 @@ function winningBanner(winner){
   }
 }
 
+function battleStatus(hp1, hp2){
+  var status_p = $('#status_text')
+  var p_one = $('#input1').val()
+  var p_two = $('#input2').val()
+  if(p_one === ""){
+    p_one = "Player 1"
+  }
+  if(p_two === ""){
+    p_two = "Player 2"
+  }
+
+  status_p.html(`${p_one}'s Bot HP: ${hp1}<br>
+                ${p_two}'s Bot HP: ${hp2}<br>`)
+}
+
 getBotChoiceAndExecute()
+})

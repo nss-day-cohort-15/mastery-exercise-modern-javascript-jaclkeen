@@ -1,9 +1,19 @@
 .container{
   text-align: center;
+  background-color: black;
+}
+
+header h1{
+  color: white;
 }
 
 .name_inputs input{
   border: 2px solid black;
+  color: black;
+}
+
+.name_inputs label{
+  color: white;
 }
 
 .robot_select{
@@ -20,7 +30,7 @@
 
 .attack{
   text-align: center;
-  margin-top: 5%;
+  margin-top: 3%;
   padding-left: 1%;
   padding-right: 1%;
 }
@@ -31,9 +41,22 @@
   background-color: red;
   color: white;
 }
+
 .winner-banner p{
-  margin-top: 2%;
+  padding: .5%;
 }
-.hidden{
-  display: none;
+
+.status{
+  width: 60%;
+  text-align: left;
+  margin: auto;
+  margin-top: 2%;
+  color: white;
+  border: 3px solid darkgrey;
+  background-color: black;
+}
+
+.status h3{
+  margin-left:2%;
+  margin-top: 1%;
 }
