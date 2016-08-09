@@ -11,7 +11,8 @@
 }
 
 .robot_imgs img{
-  width: 40%;
+  width: 35%;
+  height: 325px;
   margin-top: 4%;
   margin-left: 3.5%;
   display: inline-block;
@@ -22,4 +23,17 @@
   margin-top: 5%;
   padding-left: 1%;
   padding-right: 1%;
+}
+
+.winner-banner{
+  margin-top: 3%;
+  border: 2px solid black;
+  background-color: red;
+  color: white;
+}
+.winner-banner p{
+  margin-top: 2%;
+}
+.hidden{
+  display: none;
 }
