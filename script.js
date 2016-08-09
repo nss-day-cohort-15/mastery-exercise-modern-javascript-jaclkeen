@@ -1,8 +1,9 @@
 $('document').ready(function(){
   var robots_arr = []
   $('#winner_banner').hide()
+
 // ORIGINAL ROBOT OBJECT DECLARTION//////////////
-  var Robot = function(array){
+  var Robot = function(){
     this.robots = []
   }
 /////////////////////////////////////////////////
@@ -25,32 +26,29 @@ $('document').ready(function(){
 // TYPES OF DRONES
   //FIRST DRONE
   var Darshan = function(){
-    this.name = 'darshan'
+    this.name = 'Darshan'
     this.attack = Math.floor(Math.random() * (15 - 7 + 1)) + 7
     this.hp = Math.floor(Math.random() * (100 - 80 + 1)) + 80
   }
   Darshan.prototype = new Drone()
   //SECOND DRONE
   var Galen = function(){
-    this.name = 'galen'
+    this.name = 'Galen'
     this.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5
     this.hp = Math.floor(Math.random() * (100 - 90 + 1)) + 90
-    this.addToArray = function(){
-      Drone.drones.push(Galen)
-    }
   }
   Galen.prototype = new Drone()
 // TYPES OF BIPEDAL'S////////////////////////////
   //FIRST BIPEDAL
   var Nariko = function(){
-    this.name = 'nariko'
+    this.name = 'Nariko'
     this.attack = Math.floor(Math.random() * (35 - 20 + 1)) + 20
     this.hp = Math.floor(Math.random() * (50 - 40 + 1)) + 40
   }
   Nariko.prototype = new Bipedal()
   //SECOND BIPEDAL
   var Rabiah = function(){
-    this.name = 'rabiah'
+    this.name = 'Rabiah'
     this.attack = Math.floor(Math.random() * (40 - 25 + 1)) + 20
     this.hp = Math.floor(Math.random() * (45 - 35 + 1)) + 35
   }
@@ -58,83 +56,82 @@ $('document').ready(function(){
 //TYPES OF ATV'S////////////////////////////////////
   //FIRST ATV
   var Billybob = function(){
-    this.name = 'billybob'
+    this.name = 'Billybob'
     this.attack = Math.floor(Math.random() * (20 - 5 + 1)) + 5
     this.hp = Math.floor(Math.random() * (70 - 60 + 1)) + 60
   }
   Billybob.prototype = new ATV()
   //SECOND ATV
   var Bertha = function(){
-    this.name = 'bertha'
+    this.name = 'Bertha'
     this.attack = Math.floor(Math.random() * (15 - 10 + 1)) + 10
     this.hp = Math.floor(Math.random() * (80 - 70 + 1)) + 70
   }
   Bertha.prototype = new ATV()
 
-  var darshan = new Darshan()
-  var galen = new Galen()
-  var nariko = new Nariko()
-  var rabiah = new Rabiah()
-  var billybob = new Billybob()
-  var bertha = new Bertha()
-
-  robots_arr.push(darshan, galen, nariko, rabiah, billybob, bertha)
-  darshan.drones.push(darshan)
-  console.log(darshan.drones)
-  console.log(robots_arr)
-
 function getBotChoiceAndExecute(){
   var select = $('select')
-  var bot_choice1 = $('#robot_select')
-  var bot_choice2 = $('#robot_select2')
   var $bot1_val, $bot2_val
 
   select.on('change', function(){
-    $bot1_val = bot_choice1.val()
-    $bot2_val = bot_choice2.val()
+    var bot_choice1 = $('#robot_select').val()
+    var bot_choice2 = $('#robot_select2').val()
+      if(bot_choice1 !== 'choose' && bot_choice2 !== 'choose'){
+        bot1 = selectObject(bot_choice1)
+        bot2 = selectObject(bot_choice2)
+      }
   })
-
   $('#attack_button').on('click', function(){
-    getBotObject($bot1_val, $bot2_val)
+    attack(bot1, bot2)
   })
 }
 
-
-function getBotObject(choice1, choice2){
-  var select = $('select')
-  var selected_bot1, selected_bot2
-  if(choice1 !== 'choose' && choice2 !== 'choose'){
-    for(key in robots_arr){
-      if(choice1 === robots_arr[key].name){
-        selected_bot1 = robots_arr[key]
-      }
-      if(choice2 === robots_arr[key].name){
-        selected_bot2 = robots_arr[key]
-      }
-    }
-      attack(selected_bot1, selected_bot2)
+function selectObject(choice){
+  var bot
+  if(choice === 'darshan'){
+    bot = new Darshan()
   }
+  else if(choice === 'galen'){
+    bot = new Galen()
+  }
+  else if(choice === 'nariko'){
+    bot = new Nariko()
+  }
+  else if(choice === 'rabiah'){
+    bot = new Rabiah
+  }
+  else if(choice === 'billybob'){
+    bot = new Billybob()
+  }
+  else{
+   bot = new Bertha()
+  }
+  console.log("choice", bot)
+  return bot
 }
 
-function attack(bot1, bot2){
+function attack(bot1,bot2){
   var winner
     if(bot1.hp > 0 && bot2.hp > 0){
       bot1.hp -= bot2.attack
       bot2.hp -= bot1.attack
       console.log("BOT1", bot1.hp)
       console.log("BOT2", bot2.hp)
-
       if(bot1.hp < 1){
         bot1.hp = 0
         winner = "bot2"
         winningBanner(winner)
         $('#attack_button').attr("disabled", true)
       }
-      else if(bot2.hp < 1){
+      if(bot2.hp < 1){
         bot2.hp = 0
         winner = "bot1"
         winningBanner(winner)
         $('#attack_button').attr("disabled", true)
+      }
+      if(bot1.hp === 0 && bot2.hp === 0){
+        winner = "tie"
+        winningBanner(winner)
       }
       battleStatus(bot1.hp, bot2.hp)
     }
@@ -146,14 +143,18 @@ function winningBanner(winner){
   var $banner = $('#winner-banner')
   var $banner_text = $('#banner_text')
 
-  $('#winner_banner').fadeIn(3000)
+  $('#winner_banner').fadeIn(2000)
 
   if(winner === "bot1"){
     $banner_text.html(`Congratulations ${$player1}, you beat, ${$player2}!`)
     $banner.append($banner_text)
   }
-  else{
+  else if(winner === "bot2"){
     $banner_text.html(`Congratulations ${$player2}, you beat, ${$player1}!`)
+    $banner.append($banner_text)
+  }
+  else{
+    $banner_text.html(`It's a tie! Play again for the tie breaker!`)
     $banner.append($banner_text)
   }
 }
@@ -172,5 +173,5 @@ function battleStatus(hp1, hp2){
                 ${p_two}'s Bot HP: ${hp2}<br>`)
 }
 
-getBotChoiceAndExecute()
+  getBotChoiceAndExecute()
 })
