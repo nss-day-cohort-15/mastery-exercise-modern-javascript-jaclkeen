@@ -1,62 +1,87 @@
 $('document').ready(function(){
   var robots_arr = []
   $('#winner_banner').hide()
-// ORIGINAL ROBOT OBJECT DECLARTION
-  var Robot = function(){}
-
+// ORIGINAL ROBOT OBJECT DECLARTION//////////////
+  var Robot = function(array){
+    this.robots = []
+  }
+/////////////////////////////////////////////////
 // DRONE DECLARTION
-  var Drone = function(){}
+  var Drone = function(){
+    this.drones = []
+  }
   Drone.prototype = new Robot()
-
 // BIPEDAL DECLARTION
-  var Bipedal = function(){}
+  var Bipedal = function(){
+    this.bipedals = []
+  }
   Bipedal.prototype = new Robot()
-
-// ATV DECLARTION
-  var ATV = function(){}
+///ATV DECLARTION
+  var ATV = function(){
+    this.atvs = []
+  }
   ATV.prototype = new Robot()
-
+/////////////////////////////////////////////////
 // TYPES OF DRONES
   //FIRST DRONE
-    var darshan = new Drone()
-      darshan.name = 'darshan'
-      darshan.attack = Math.floor(Math.random() * (15 - 7 + 1)) + 7
-      darshan.hp = Math.floor(Math.random() * (100 - 80 + 1)) + 80
-      robots_arr.push(darshan)
+  var Darshan = function(){
+    this.name = 'darshan'
+    this.attack = Math.floor(Math.random() * (15 - 7 + 1)) + 7
+    this.hp = Math.floor(Math.random() * (100 - 80 + 1)) + 80
+  }
+  Darshan.prototype = new Drone()
   //SECOND DRONE
-    var galen = new Drone()
-      galen.name = 'galen'
-      galen.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5
-      galen.hp = Math.floor(Math.random() * (100 - 90 + 1)) + 90
-      robots_arr.push(galen)
-// TYPES OF BIPEDAL'S
+  var Galen = function(){
+    this.name = 'galen'
+    this.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5
+    this.hp = Math.floor(Math.random() * (100 - 90 + 1)) + 90
+    this.addToArray = function(){
+      Drone.drones.push(Galen)
+    }
+  }
+  Galen.prototype = new Drone()
+// TYPES OF BIPEDAL'S////////////////////////////
   //FIRST BIPEDAL
-    var nariko = new Bipedal()
-      nariko.name = 'nariko'
-      nariko.attack = Math.floor(Math.random() * (35 - 20 + 1)) + 20
-      nariko.hp = Math.floor(Math.random() * (50 - 40 + 1)) + 40
-      robots_arr.push(nariko)
+  var Nariko = function(){
+    this.name = 'nariko'
+    this.attack = Math.floor(Math.random() * (35 - 20 + 1)) + 20
+    this.hp = Math.floor(Math.random() * (50 - 40 + 1)) + 40
+  }
+  Nariko.prototype = new Bipedal()
   //SECOND BIPEDAL
-    var rabiah = new Bipedal()
-      rabiah.name = 'rabiah'
-      rabiah.attack = Math.floor(Math.random() * (40 - 25 + 1)) + 20
-      rabiah.hp = Math.floor(Math.random() * (45 - 35 + 1)) + 35
-      robots_arr.push(rabiah)
-//TYPES OF ATV'S
+  var Rabiah = function(){
+    this.name = 'rabiah'
+    this.attack = Math.floor(Math.random() * (40 - 25 + 1)) + 20
+    this.hp = Math.floor(Math.random() * (45 - 35 + 1)) + 35
+  }
+  Rabiah.prototype = new Bipedal()
+//TYPES OF ATV'S////////////////////////////////////
   //FIRST ATV
-    var billybob = new ATV()
-      billybob.name = 'billybob'
-      billybob.attack = Math.floor(Math.random() * (20 - 5 + 1)) + 5
-      billybob.hp = Math.floor(Math.random() * (70 - 60 + 1)) + 60
-      robots_arr.push(billybob)
+  var Billybob = function(){
+    this.name = 'billybob'
+    this.attack = Math.floor(Math.random() * (20 - 5 + 1)) + 5
+    this.hp = Math.floor(Math.random() * (70 - 60 + 1)) + 60
+  }
+  Billybob.prototype = new ATV()
   //SECOND ATV
-    var bertha = new ATV()
-      bertha.name = 'bertha'
-      bertha.attack = Math.floor(Math.random() * (15 - 10 + 1)) + 10
-      bertha.hp = Math.floor(Math.random() * (80 - 70 + 1)) + 70
-      robots_arr.push(bertha)
+  var Bertha = function(){
+    this.name = 'bertha'
+    this.attack = Math.floor(Math.random() * (15 - 10 + 1)) + 10
+    this.hp = Math.floor(Math.random() * (80 - 70 + 1)) + 70
+  }
+  Bertha.prototype = new ATV()
 
-console.log(darshan, galen, nariko, rabiah, billybob, bertha)
+  var darshan = new Darshan()
+  var galen = new Galen()
+  var nariko = new Nariko()
+  var rabiah = new Rabiah()
+  var billybob = new Billybob()
+  var bertha = new Bertha()
+
+  robots_arr.push(darshan, galen, nariko, rabiah, billybob, bertha)
+  darshan.drones.push(darshan)
+  console.log(darshan.drones)
+  console.log(robots_arr)
 
 function getBotChoiceAndExecute(){
   var select = $('select')
@@ -67,7 +92,6 @@ function getBotChoiceAndExecute(){
   select.on('change', function(){
     $bot1_val = bot_choice1.val()
     $bot2_val = bot_choice2.val()
-
   })
 
   $('#attack_button').on('click', function(){
@@ -88,7 +112,6 @@ function getBotObject(choice1, choice2){
         selected_bot2 = robots_arr[key]
       }
     }
-      // console.log(selected_bot1, selected_bot2)
       attack(selected_bot1, selected_bot2)
   }
 }
@@ -100,6 +123,7 @@ function attack(bot1, bot2){
       bot2.hp -= bot1.attack
       console.log("BOT1", bot1.hp)
       console.log("BOT2", bot2.hp)
+
       if(bot1.hp < 1){
         bot1.hp = 0
         winner = "bot2"
@@ -144,7 +168,6 @@ function battleStatus(hp1, hp2){
   if(p_two === ""){
     p_two = "Player 2"
   }
-
   status_p.html(`${p_one}'s Bot HP: ${hp1}<br>
                 ${p_two}'s Bot HP: ${hp2}<br>`)
 }
