@@ -29,6 +29,7 @@ $('document').ready(function(){
     this.name = 'Darshan'
     this.attack = Math.floor(Math.random() * (15 - 7 + 1)) + 7
     this.hp = Math.floor(Math.random() * (100 - 80 + 1)) + 80
+    this.url = "http://1.bp.blogspot.com/-CTHjkJqQuCg/UutHe-ejSKI/AAAAAAAAAfo/D07mDJ_JyOI/s1600/enemy_keg_melee.gif"
   }
   Darshan.prototype = new Drone()
   //SECOND DRONE
@@ -36,6 +37,7 @@ $('document').ready(function(){
     this.name = 'Galen'
     this.attack = Math.floor(Math.random() * (10 - 5 + 1)) + 5
     this.hp = Math.floor(Math.random() * (100 - 90 + 1)) + 90
+    this.url = "http://1.bp.blogspot.com/-ncxpaMPG53U/UutKn7JRZFI/AAAAAAAAAgA/dTu4Nhgf4O8/s1600/enemy_bomber.gif"
   }
   Galen.prototype = new Drone()
 // TYPES OF BIPEDAL'S////////////////////////////
@@ -44,6 +46,7 @@ $('document').ready(function(){
     this.name = 'Nariko'
     this.attack = Math.floor(Math.random() * (35 - 20 + 1)) + 20
     this.hp = Math.floor(Math.random() * (50 - 40 + 1)) + 40
+    this.url = "https://media.giphy.com/media/1Ho8p0CadGicg/giphy.gif"
   }
   Nariko.prototype = new Bipedal()
   //SECOND BIPEDAL
@@ -51,6 +54,7 @@ $('document').ready(function(){
     this.name = 'Rabiah'
     this.attack = Math.floor(Math.random() * (40 - 25 + 1)) + 20
     this.hp = Math.floor(Math.random() * (45 - 35 + 1)) + 35
+    this.url = "http://i.imgur.com/BzBgC.gif"
   }
   Rabiah.prototype = new Bipedal()
 //TYPES OF ATV'S////////////////////////////////////
@@ -59,6 +63,7 @@ $('document').ready(function(){
     this.name = 'Billybob'
     this.attack = Math.floor(Math.random() * (20 - 5 + 1)) + 5
     this.hp = Math.floor(Math.random() * (70 - 60 + 1)) + 60
+    this.url = "http://vignette1.wikia.nocookie.net/metalslug/images/5/55/Jupiter_king.gif/revision/latest?cb=20140801191852"
   }
   Billybob.prototype = new ATV()
   //SECOND ATV
@@ -66,6 +71,7 @@ $('document').ready(function(){
     this.name = 'Bertha'
     this.attack = Math.floor(Math.random() * (15 - 10 + 1)) + 10
     this.hp = Math.floor(Math.random() * (80 - 70 + 1)) + 70
+    this.url = "http://vignette1.wikia.nocookie.net/metalslug/images/3/3b/Dragon_nosuke.gif/revision/latest?cb=20140801190752"
   }
   Bertha.prototype = new ATV()
 
@@ -79,6 +85,11 @@ function getBotChoiceAndExecute(){
       if(bot_choice1 !== 'choose' && bot_choice2 !== 'choose'){
         bot1 = selectObject(bot_choice1)
         bot2 = selectObject(bot_choice2)
+
+        var p_one = $('#input1').val()
+        var p_two = $('#input2').val()
+        $('#bot_name1').html(p_one)
+        $('#bot_name2').html(p_two)
       }
   })
   $('#attack_button').on('click', function(){
@@ -88,23 +99,29 @@ function getBotChoiceAndExecute(){
 
 function selectObject(choice){
   var bot
-  if(choice === 'darshan'){
+  if(choice === 'Darshan'){
     bot = new Darshan()
+    $('#right_img').attr('src', bot.url)
   }
-  else if(choice === 'galen'){
+  else if(choice === 'Galen'){
     bot = new Galen()
+    $('#left_img').attr('src', bot.url)
   }
-  else if(choice === 'nariko'){
+  else if(choice === 'Nariko'){
     bot = new Nariko()
+    $('#right_img').attr('src', bot.url)
   }
-  else if(choice === 'rabiah'){
+  else if(choice === 'Rabiah'){
     bot = new Rabiah
+    $('#left_img').attr('src', bot.url)
   }
-  else if(choice === 'billybob'){
+  else if(choice === 'Billybob'){
     bot = new Billybob()
+    $('#right_img').attr('src', bot.url)
   }
   else{
-   bot = new Bertha()
+    bot = new Bertha()
+    $('#left_img').attr('src', bot.url)
   }
   console.log("choice", bot)
   return bot
@@ -169,8 +186,8 @@ function battleStatus(hp1, hp2){
   if(p_two === ""){
     p_two = "Player 2"
   }
-  status_p.html(`${p_one}'s Bot HP: ${hp1}<br>
-                ${p_two}'s Bot HP: ${hp2}<br>`)
+  status_p.html(`${p_one}'s HP: ${hp1}<br>
+                ${p_two}'s HP: ${hp2}<br>`)
 }
 
   getBotChoiceAndExecute()

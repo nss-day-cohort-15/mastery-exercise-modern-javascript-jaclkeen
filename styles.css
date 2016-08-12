@@ -20,12 +20,18 @@ header h1{
   margin-left: 5%;
 }
 
-.robot_imgs img{
+.left_img{
   width: 35%;
-  height: 325px;
+  height: 300px;
   margin-top: 4%;
   margin-left: 3.5%;
   display: inline-block;
+}
+
+.right_img{
+  width: 35%;
+  height: 300px;
+  margin-top: 4%;
 }
 
 .attack{
@@ -60,3 +66,29 @@ header h1{
   margin-left:2%;
   margin-top: 1%;
 }
+
+.status p{
+  margin-left: 4%;
+}
+
+.bot_name1 {
+  margin-top: 17%;
+  color: white;
+  display: inline-block;
+  position: relative;
+  top: -125px;
+  left: 250px;
+  text-decoration: underline;
+}
+
+.bot_name2 {
+  margin-top: 2%;
+  color: white;
+  display: inline-block;
+  position: relative;
+  top: -126px;
+  left: 196px;
+  text-decoration: underline;
+}
+
+
