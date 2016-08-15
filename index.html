@@ -2,12 +2,13 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Robot Battledome</title>
 </head>
 <body class="container">
 
-  <header><h1>Robot Battledome</h1></header>
+  <header><h2>Robot Battledome</h2></header>
 
   <div class="name_inputs" id="name_inputs">
     <label for="input1">First Robot Name: </label>
@@ -46,7 +47,7 @@
     </div>
 
     <div class="status" id="status">
-      <h4>Battle Status: </h4>
+      <h4 class="status_head">Battle Status: </h4>
       <p class="status_text" id="status_text"></p>
     </div>
 
@@ -61,6 +62,10 @@
 
 
   </div>
+
+  <script type="text/javascript" src="jasmine/lib/jasmine-2.0.0/jasmine.js"></script>
+  <script type="text/javascript" src="jasmine/lib/jasmine-2.0.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="jasmine/lib/jasmine-2.0.0/boot.js"></script>
 
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="script.js"></script>

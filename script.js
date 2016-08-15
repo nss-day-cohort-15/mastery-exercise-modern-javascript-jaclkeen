@@ -112,7 +112,7 @@ function selectObject(choice){
     $('#right_img').attr('src', bot.url)
   }
   else if(choice === 'Rabiah'){
-    bot = new Rabiah
+    bot = new Rabiah()
     $('#left_img').attr('src', bot.url)
   }
   else if(choice === 'Billybob'){
