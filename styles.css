@@ -11,6 +11,10 @@ header h2{
   margin-top: 0;
 }
 
+header h1{
+  color: white;
+}
+
 .name_inputs input{
   border: 2px solid black;
   color: black;
@@ -101,6 +105,7 @@ header h2{
 
 .robot_imgs{
   margin-top: -5%;
+  left: 196px;
+  text-decoration: underline;
 }
-
 

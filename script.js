@@ -1,4 +1,6 @@
+
 $('document').ready(function(){
+
   var robots_arr = []
   $('#winner_banner').hide()
 
@@ -77,14 +79,15 @@ $('document').ready(function(){
 
 function getBotChoiceAndExecute(){
   var select = $('select')
-  var $bot1_val, $bot2_val
+
+  var bot1, bot2
 
   select.on('change', function(){
     var bot_choice1 = $('#robot_select').val()
     var bot_choice2 = $('#robot_select2').val()
       if(bot_choice1 !== 'choose' && bot_choice2 !== 'choose'){
-        bot1 = selectObject(bot_choice1)
-        bot2 = selectObject(bot_choice2)
+        bot1 = selectObjectOne(bot_choice1)
+        bot2 = selectObjectTwo(bot_choice2)
 
         var p_one = $('#input1').val()
         var p_two = $('#input2').val()
@@ -97,11 +100,11 @@ function getBotChoiceAndExecute(){
   })
 }
 
-function selectObject(choice){
+function selectObjectOne(choice){
   var bot
   if(choice === 'Darshan'){
     bot = new Darshan()
-    $('#right_img').attr('src', bot.url)
+    $('#left_img').attr('src', bot.url)
   }
   else if(choice === 'Galen'){
     bot = new Galen()
@@ -113,11 +116,11 @@ function selectObject(choice){
   }
   else if(choice === 'Rabiah'){
     bot = new Rabiah()
+
     $('#left_img').attr('src', bot.url)
   }
   else if(choice === 'Billybob'){
     bot = new Billybob()
-    $('#right_img').attr('src', bot.url)
   }
   else{
     bot = new Bertha()
@@ -127,6 +130,36 @@ function selectObject(choice){
   return bot
 }
 
+function selectObjectTwo(choice){
+  var bot2
+  if(choice === 'Darshan'){
+    bot2 = new Darshan()
+    $('#right_img').attr('src', bot2.url)
+  }
+  else if(choice === 'Galen'){
+    bot2 = new Galen()
+    $('#right_img').attr('src', bot2.url)
+  }
+  else if(choice === 'Nariko'){
+    bot2 = new Nariko()
+    $('#right_img').attr('src', bot2.url)
+  }
+  else if(choice === 'Rabiah'){
+    bot2 = new Rabiah
+    $('#right_img').attr('src', bot2.url)
+  }
+  else if(choice === 'Billybob'){
+    bot2 = new Billybob()
+    $('#right_img').attr('src', bot2.url)
+  }
+  else{
+    bot2 = new Bertha()
+    $('#right_img').attr('src', bot2.url)
+  }
+  console.log("choice", bot2)
+  return bot2
+}
+
 function attack(bot1,bot2){
   var winner
     if(bot1.hp > 0 && bot2.hp > 0){
@@ -134,6 +167,7 @@ function attack(bot1,bot2){
       bot2.hp -= bot1.attack
       console.log("BOT1", bot1.hp)
       console.log("BOT2", bot2.hp)
+
       if(bot1.hp < 1){
         bot1.hp = 0
         winner = "bot2"
@@ -152,6 +186,20 @@ function attack(bot1,bot2){
       }
       battleStatus(bot1.hp, bot2.hp)
     }
+}
+
+function battleStatus(hp1, hp2){
+  var status_p = $('#status_text')
+  var p_one = $('#input1').val()
+  var p_two = $('#input2').val()
+  if(p_one === ""){
+    p_one = "Player 1"
+  }
+  if(p_two === ""){
+    p_two = "Player 2"
+  }
+  status_p.html(`${p_one}'s HP: ${hp1}<br>
+                ${p_two}'s HP: ${hp2}<br>`)
 }
 
 function winningBanner(winner){
